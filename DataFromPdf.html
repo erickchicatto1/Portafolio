@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero de Control de Pobreza en México (2008-2018)</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawPobrezachart);
+        google.charts.setOnLoadCallback(drawPobrezaExtremachart);
+        google.charts.setOnLoadCallback(drawCarenciaServiciosBasicosChart);
+        google.charts.setOnLoadCallback(drawCarenciasSocialesChart);
+        google.charts.setOnLoadCallback(drawPobrezaRuralUrbanaChart);
+        google.charts.setOnLoadCallback(drawScatterChart);
+
+        function drawPobrezachart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Año', 'Número de personas en situación de pobreza (millones)'],
+                ['2008', 49.5],
+                ['2018', 52.4]
+            ]);
+            var options = {
+                title: 'Evolución del número de personas en situación de pobreza (2008-2018)',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                colors: ['#1E88E5']  // Azul
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawPobrezaExtremachart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Entidad Federativa', '2008', '2018'],
+                ['Chiapas', 77.0, 76.4],
+                ['Guerrero', 68.4, 66.5],
+                ['Oaxaca', 61.8, 66.4],
+                ['Veracruz', 51.2, 61.8]
+            ]);
+            var options = {
+                title: 'Pobreza extrema por entidad federativa (2008 vs. 2018)',
+                chartArea: {width: '50%'},
+                hAxis: {title: 'Porcentaje', minValue: 0},
+                vAxis: {title: 'Entidad Federativa'},
+                colors: ['#D81B60', '#FFA726']  // Rosa y naranja
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawCarenciaServiciosBasicosChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Año', 'Porcentaje de población con carencia de servicios básicos'],
+                ['2018', 19.8]
+            ]);
+            var options = {
+                title: 'Carencia de servicios básicos en la vivienda (2018)',
+                is3D: true,
+                colors: ['#43A047']  // Verde
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('pie_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawCarenciasSocialesChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Carencia Social', '2008', '2018'],
+                ['Rezago educativo', 21.9, 16.9],
+                ['Servicios de salud', 38.4, 16.2],
+                ['Seguridad social', 65.0, 57.3],
+                ['Calidad y espacios de vivienda', 17.7, 11.1],
+                ['Servicios básicos en vivienda', 22.9, 19.8],
+                ['Alimentación', 21.7, 20.4]
+            ]);
+            var options = {
+                title: 'Carencias sociales (2008 vs. 2018)',
+                chartArea: {width: '50%'},
+                hAxis: {title: 'Porcentaje'},
+                vAxis: {title: 'Carencia Social'},
+                colors: ['#FB8C00', '#1976D2']  // Naranja y azul
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('carencias_sociales_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawPobrezaRuralUrbanaChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Año', 'Pobreza Rural (%)', 'Pobreza Urbana (%)'],
+                ['2008', 62.5, 38.9],
+                ['2018', 55.3, 37.6]
+            ]);
+            var options = {
+                title: 'Pobreza rural vs. urbana (2008-2018)',
+                hAxis: {title: 'Año', minValue: 2008, maxValue: 2018},
+                vAxis: {title: 'Porcentaje', minValue: 0, maxValue: 100},
+                legend: 'none',
+                colors: ['#8E24AA', '#E53935']  // Morado y rojo
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('pobreza_rural_urbana_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawScatterChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Año', 'Índice de Pobreza'],
+                [2008, 45],
+                [2018, 42]
+            ]);
+            var options = {
+                title: 'Índice de Pobreza',
+                hAxis: {title: 'Año'},
+                vAxis: {title: 'Índice de Pobreza'},
+                legend: 'none',
+                colors: ['#FBC02D']  // Amarillo
+            };
+            var chart = new google.visualization.ScatterChart(document.getElementById('scatter_chart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h1>Tablero de Control de Pobreza en México (2008-2018)</h1>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    <div id="bar_chart" style="width: 900px; height: 500px"></div>
+    <div id="pie_chart" style="width: 900px; height: 500px"></div>
+    <div id="carencias_sociales_chart" style="width: 900px; height: 500px"></div>
+    <div id="pobreza_rural_urbana_chart" style="width: 900px; height: 500px"></div>
+    <div id="scatter_chart" style="width: 900px; height: 500px"></div>
+</body>
+</html>
